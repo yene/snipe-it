@@ -63,9 +63,9 @@ class AssetCheckoutController extends Controller
             $this->authorize('checkout', $asset);
             $admin = Auth::user();
 
-            $target = $this->determineCheckoutTarget($asset);
-
-            $asset = $this->updateAssetLocation($asset, $target);
+            $target = $this->determineCheckoutTarget();
+            $location = $this->determineCheckoutLocation();
+            $asset = $this->updateAssetLocation($asset, $location);
 
             $checkout_at = date("Y-m-d H:i:s");
             if (($request->filled('checkout_at')) && ($request->get('checkout_at')!= date("Y-m-d"))) {

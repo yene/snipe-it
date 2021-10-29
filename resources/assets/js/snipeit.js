@@ -435,7 +435,7 @@ $(document).ready(function () {
 
                 $('#assigned_asset').hide();
                 $('#assigned_user').show();
-                $('#assigned_location').hide();
+                $('#assigned_location').show();
                 if (userid) {
                     $('#current_assets_box').fadeIn();
                 }
