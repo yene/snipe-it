@@ -37,7 +37,18 @@
     {{-- page level css --}}
     @stack('css')
 
-
+    <style>
+    #scan-box {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 0px;
+      border: 1px solid silver;
+      z-index: 9999;
+      background-color: white;
+    }
+    </style>
 
     @if (($snipeSettings) && ($snipeSettings->header_color!=''))
     <style nonce="{{ csrf_token() }}">
@@ -175,17 +186,22 @@
                   <li>
                   <form class="navbar-form navbar-left form-horizontal" role="search" action="{{ route('findbytag/hardware') }}" method="get">
                       <div class="col-xs-12 col-md-12">
-                          <div class="col-xs-12 form-group">
+                          <div class="col-xs-7 form-group">
                               <label class="sr-only" for="tagSearch">{{ trans('general.lookup_by_tag') }}</label>
                               <input type="text" class="form-control" id="tagSearch" name="assetTag" placeholder="{{ trans('general.lookup_by_tag') }}">
                               <input type="hidden" name="topsearch" value="true" id="search">
                           </div>
-                          <div class="col-xs-1">
-                              <button type="submit" class="btn btn-primary pull-right">
+                          <div class="col-xs-5 pull-right">
+                              <button type="submit" class="btn btn-primary ">
                                   <i class="fa fa-search" aria-hidden="true"></i>
                                   <span class="sr-only">Search</span>
                               </button>
+                              <button id="scan-qrcode" type="button" class="btn btn-primary ">
+                                  <i class="fa fa-camera" aria-hidden="true"></i>
+                                  <span class="sr-only">camera</span>
+                              </button>
                           </div>
+
                       </div>
                   </form>
                   </li>
@@ -855,6 +871,8 @@
 
     {{-- Javascript files --}}
     <script src="{{ url(mix('js/dist/all.js')) }}" nonce="{{ csrf_token() }}"></script>
+    <script src="{{ url(mix('js/dist/html5-qrcode.min.js')) }}" nonce="{{ csrf_token() }}"></script>
+    <script src="{{ url(mix('js/dist/qrscanner.js')) }}" nonce="{{ csrf_token() }}"></script>
 
     <!-- v5-beta: This pGenerator call must remain here for v5 - until fixed - so that the JS password generator works for the user create modal. -->
     <script src="{{ url('js/pGenerator.jquery.js') }}"></script>
