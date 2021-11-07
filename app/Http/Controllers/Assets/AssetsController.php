@@ -423,7 +423,12 @@ class AssetsController extends Controller
     {
         $topsearch = ($request->get('topsearch')=="true");
 
-        if (!$asset = Asset::where('asset_tag', '=', $request->get('assetTag'))->first()) {
+        $asset = Asset::where('asset_tag', '=', $request->get('assetTag'))->first();
+        if (!$asset) {
+            $asset = Asset::where('serial', '=', $request->get('assetTag'))->first();
+        }
+
+        if (!$asset) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
         }
         $this->authorize('view', $asset);
