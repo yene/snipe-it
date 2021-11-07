@@ -23,7 +23,7 @@ function closeScanner() {
 
 function scanQRCode() {
   addReaderView();
-  let html5QrcodeScanner = new Html5QrcodeScanner('reader', { fps: 10, qrbox: 250, formatsToSupport: [ Html5QrcodeSupportedFormats.QR_CODE ]});
+  let html5QrcodeScanner = new Html5QrcodeScanner('reader', { fps: 10, qrbox: 250, rememberLastUsedCamera: true, formatsToSupport: [ Html5QrcodeSupportedFormats.QR_CODE ]});
   html5QrcodeScanner.render(onScanSuccess);
   window.html5QrcodeScanner = html5QrcodeScanner;
 }
