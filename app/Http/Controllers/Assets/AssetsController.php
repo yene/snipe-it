@@ -422,10 +422,11 @@ class AssetsController extends Controller
     public function getAssetByTag(Request $request)
     {
         $topsearch = ($request->get('topsearch')=="true");
+        $assetTag = $request->get('assetTag');
 
-        $asset = Asset::where('asset_tag', '=', $request->get('assetTag'))->first();
-        if (!$asset) {
-            $asset = Asset::where('serial', '=', $request->get('assetTag'))->first();
+        $asset = Asset::where('asset_tag', '=', $assetTag)->first();
+        if (!$asset && strlen($assetTag) >= 3) {
+            $asset = Asset::where('serial', 'LIKE', $assetTag . '%')->first();
         }
 
         if (!$asset) {
